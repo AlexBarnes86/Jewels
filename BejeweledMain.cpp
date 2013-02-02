@@ -10,7 +10,7 @@
 */
 
 #include "std_lib_facilities.h"
-#include "GUI/BejeweledWindow.h"
+#include "BejeweledWindow.h"
 #include <time.h>
 
 string getImagePath()
