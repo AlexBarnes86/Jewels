@@ -1,0 +1,184 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0107 
+header_name {.h} 
+code_name {.cxx}
+comment {\#include <FL/Fl_GIF_Image.H>
+\#include "std_lib_facilities.h"} {selected not_in_source in_header
+} 
+
+class BejeweledWindow {open
+} {
+  Function {BejeweledWindow()} {open
+  } {
+    Fl_Window mainWindow {
+      label Bejeweled open
+      private xywh {471 185 600 480} type Double color 0 size_range {600 480 600 480} visible
+    } {
+      Fl_Menu_Bar menuBar {
+        label {Game Rules} open
+        private xywh {0 0 600 25} color 0 labelcolor 63
+      } {
+        Submenu menuItemGame {
+          label {&Game} open
+          private xywh {0 0 100 20} labelcolor 2
+        } {
+          MenuItem menuItemNew {
+            label {&New}
+            callback {newGame();}
+            private xywh {0 0 100 20} labelcolor 2
+          }
+          MenuItem menuItemPause {
+            label {&Pause}
+            private xywh {5 5 100 20} labelcolor 2 deactivate
+          }
+          MenuItem menuItemExit {
+            label {E&xit}
+            callback {mainWindow->hide();}
+            private xywh {0 0 100 20} labelcolor 2
+          }
+        }
+        Submenu menuItemHelp {
+          label {&Help} open
+          private xywh {0 0 100 20} labelcolor 2
+        } {
+          MenuItem menuItemRules {
+            label {Game Rules}
+            callback {showHelp();}
+            private xywh {0 0 100 20} labelcolor 63
+          }
+          MenuItem menuItemAbout {
+            label {&About}
+            callback {showAbout();}
+            private xywh {0 0 100 20} labelcolor 2
+          }
+          MenuItem menuItemHScores {
+            label {High Scores}
+            callback {showScores();}
+            private xywh {0 0 100 20} labelcolor 2
+          }
+        }
+      }
+      Fl_Box scoreLabel {
+        private xywh {25 65 150 40}
+      }
+      Fl_Box levelLabel {
+        private xywh {20 193 155 37}
+      }
+      Fl_Button highScoreButton {
+        callback {showScores();}
+        private xywh {10 330 175 45} color 32 selection_color 0
+      }
+      Fl_Button pauseButton {
+        private xywh {10 385 175 50} color 0
+      }
+      Fl_Progress {} {
+        private xywh {190 442 400 30} box PLASTIC_UP_BOX color 32 selection_color 6
+      }
+      Fl_Group {} {open
+        private xywh {190 35 400 400} box ENGRAVED_BOX color 32 align 32
+      } {}
+      Fl_Box scoreBox {
+        label 000000
+        private xywh {5 120 180 55} box PLASTIC_DOWN_FRAME color 41 labelfont 1 labelsize 51 labelcolor 63
+      }
+      Fl_Box levelBox {
+        label 1
+        private xywh {70 250 45 60} box PLASTIC_DOWN_FRAME color 41 labelfont 1 labelsize 50 labelcolor 63
+      }
+    }
+    code {images.push_back(new Fl_GIF_Image("Score.gif"));
+images.push_back(new Fl_GIF_Image("Level.gif"));
+images.push_back(new Fl_GIF_Image("High Scores.gif"));
+images.push_back(new Fl_GIF_Image("Pause.gif"));
+scoreLabel->image(images[0]);
+levelLabel->image(images[1]);
+highScoreButton->image(images[2]);
+pauseButton->image(images[3]);} {}
+    code {mainWindow->show();} {}
+  }
+  Function {showScores()} {return_type void
+  } {
+    code {ScoresWindow sw;} {}
+  }
+  Function {showHelp()} {return_type void
+  } {
+    code {HelpWindow hw;} {}
+  }
+  Function {showAbout()} {return_type void
+  } {
+    code {AboutWindow aw;} {}
+  }
+  Function {newGame()} {return_type void
+  } {}
+  decl {vector<Fl_GIF_Image*> images;} {}
+  Function {~BejeweledWindow()} {open
+  } {
+    code {for(int i = 0; i < images.size(); i++)
+	if(images[i] != 0)
+		delete images[i];} {}
+  }
+} 
+
+class AboutWindow {} {
+  Function {AboutWindow()} {} {
+    Fl_Window aboutWindow {
+      label About open
+      private xywh {1113 585 290 170} type Double color 0 hide
+    } {
+      Fl_Box {} {
+        label {Created By:}
+        private xywh {45 59 85 20} color 63 labelcolor 63 align 149
+      }
+      Fl_Box {} {
+        label {Shanna Andrews}
+        private xywh {124 59 159 20} color 63 labelcolor 63
+      }
+      Fl_Box {} {
+        label {Alex Barnes}
+        private xywh {124 79 159 20} color 63 labelcolor 63
+      }
+      Fl_Box {} {
+        label {Dhivya Padmanabhan}
+        private xywh {124 99 159 20} color 63 labelcolor 63
+      }
+      Fl_Box {} {
+        label {ENGR 112-205}
+        private xywh {28 134 105 20} color 63 labelcolor 63
+      }
+      Fl_Box {} {
+        label {April 2006}
+        private xywh {158 134 110 20} color 63 labelcolor 63
+      }
+      Fl_Box {} {
+        label Bejeweled
+        private xywh {68 11 175 40} box UP_FRAME color 63 labelfont 1 labelsize 30 labelcolor 63
+      }
+    }
+    code {aboutWindow->show();} {}
+  }
+} 
+
+class HelpWindow {} {
+  Function {HelpWindow()} {open
+  } {
+    Fl_Window helpWindow {
+      label {Rules and Controls} open
+      private xywh {433 277 400 300} type Double color 0 hide
+    } {
+      Fl_Text_Display textDisplayHelp {
+        private xywh {0 0 400 300} box BORDER_BOX color 15 labelcolor 2
+      }
+    }
+    code {helpWindow->show();} {}
+  }
+} 
+
+class ScoresWindow {} {
+  Function {ScoresWindow()} {} {
+    Fl_Window highScoreWindow {
+      label HighScores
+      private xywh {1176 219 300 400} type Double color 32 align 0 hide
+    } {}
+    code {highScoreWindow->show();} {}
+  }
+} 

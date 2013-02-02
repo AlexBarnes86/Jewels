@@ -1,0 +1,10 @@
+Alex 1 400
+Shanna 1 380
+Dhivya 1 360
+Paul 1 340
+Pete 1 320
+Walter 1 300
+Bjerne 1 280
+Chris 1 260
+DennisRitche 1 240
+AlexStepanov 1 220

@@ -1,0 +1,19 @@
+Goal of the game:
+the goal of the game is to obtain a row of 3 
+identical gems by swapping adjacent gems till 
+desired combination is obtained.
+
+levels:
+the game originally strarts with 4 different 
+colors of gems. with every 3 consecutive level 
+another color is introduced.
+
+Controls:
+to swap gems of adjuscent rows, the user needs 
+to click on the two gems he/she needs to swap.
+
+Scoring:
+For each match that is made, the user receives 
+1 point added onto their score.
+
+Levels are not implemented in this version.
