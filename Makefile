@@ -1,29 +1,29 @@
 # Makefile to build monte_pi_sprng program
 # --- macros
 CC=g++
-CFLAGS= -I/usr/include -g
-OBJECTS= BejeweledIO.o BejeweledMain.o GameBoard.o
-LIBS= -lfltk
+CFLAGS=-I/usr/include -Iinclude -g -c
+OBJECTS=bin/BejeweledMain.o bin/BejeweledIO.o bin/BejeweledWindow.o bin/GameBoard.o
+SOURCES=src/BejeweledMain.cpp src/Bejeweled.cpp.cpp src/BejeweledMain.cpp src/BejeweledWin.cppw.cpp src/Game.cppard.cpp
+LIBS=-lfltk -lfltk_images
 APPNAME=bejeweled
-
 
 # --- targets
 all: bejeweled
-bejeweled: $(OBJECTS) 
+bejeweled: $(OBJECTS)
 	$(CC) -o $(APPNAME) $(OBJECTS) $(LIBS)
            
-BejeweledIO.o: BejeweledIO.cpp
-	$(CC) $(CLFAGS) -c BejeweledIO.cpp
+bin/BejeweledMain.o:
+	$(CC) $(CFLAGS) src/BejeweledMain.cpp -o $@
 
-BejeweledMain.o: BejeweledMain.cpp
-	$(CC) $(CLFAGS) -c BejeweledMain.cpp
+bin/BejeweledIO.o: 
+	$(CC) $(CFLAGS) src/BejeweledIO.cpp -o $@
 
-GameBoard.o: GameBoard.cpp
-	$(CC) $(CLFAGS) -c GameBoard.cpp
+bin/BejeweledWindow.o: 
+	$(CC) $(CFLAGS) src/BejeweledWindow.cpp -o $@
 
-#.cpp.o: 
-#	$(CC) $(CFLAGS) -c $<
+bin/GameBoard.o: 
+	$(CC) $(CFLAGS) src/GameBoard.cpp -o $@
 
 # --- remove binary and executable files
 clean:
-	rm -f $(APPNAME) $(OBJECTS)
+	rm -f $(APPNAME) bin/*

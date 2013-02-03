@@ -1,13 +1,13 @@
 #include "BejeweledWindow.h"
-#include "../BejeweledIO.h"
-#include "Fl/fl_ask.h"
+#include "BejeweledIO.h"
+#include "Fl/fl_ask.H"
+#include "Fl/Fl_GIF_Image.H"
 #include <iostream>
 #include <string.h>
 
 vector<Fl_GIF_Image*> imageVector;
 
-void initImages(String imgPath)
-{
+void initImages(String imgPath) {
 	imageVector.push_back(new Fl_GIF_Image((imgPath+"Score.gif").c_str()));
 	imageVector.push_back(new Fl_GIF_Image((imgPath+"Level.gif").c_str()));
 	imageVector.push_back(new Fl_GIF_Image((imgPath+"High Scores.gif").c_str()));
@@ -339,13 +339,13 @@ void cb_TileButton(Tile* tile, void* v)
 	{	
 		Direction d;
 		if(r<CurrentSelection::row)
-			d = Direction::N;
+			d = N;
 		else if(c>CurrentSelection::col)
-			d = Direction::E;
+			d = E;
 		else if(r>CurrentSelection::row)
-			d = Direction::S;
+			d = S;
 		else if(c<CurrentSelection::col)
-			d = Direction::W;
+			d = W;
 
 		bj->addScore(gb->legalMove(CurrentSelection::row, CurrentSelection::col, d));
 		bj->updateScore();

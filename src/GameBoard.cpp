@@ -44,7 +44,7 @@ void Tile::operator=(Tile& tile)
 }
 
 GameBoard::GameBoard()
-	:comboColor(-1), comboDir(Direction::UNDEFINED), numColors(7)
+	:comboColor(-1), comboDir(UNDEFINED), numColors(7)
 {
 	for(int i = 0; i < GAME_ROWS; ++i)
 		for(int j = 0; j < GAME_COLS; ++j)
@@ -56,7 +56,7 @@ GameBoard::GameBoard()
 }
 
 GameBoard::GameBoard(Fl_Group& gb)
-	:comboColor(0), comboDir(Direction::UNDEFINED), numColors(7)
+	:comboColor(0), comboDir(UNDEFINED), numColors(7)
 {
 	for(int r=0; r<GAME_ROWS; r++)
 	{
@@ -160,9 +160,9 @@ void GameBoard::findMatches(int r, int c, Jewel clr)
 	}
 	if(combo>2)
 	{
-		markTiles(r, c, clr, Direction::S, combo);
+		markTiles(r, c, clr, S, combo);
 		ostringstream ss;
-		ss << "Color: " << clr << " ["<<r<<"]["<<c<<"] Dir: " <<Direction::S;
+		ss << "Color: " << clr << " ["<<r<<"]["<<c<<"] Dir: " << S;
 		combos.push_back(ss.str());
 	}
 	combo = 0;
@@ -174,9 +174,9 @@ void GameBoard::findMatches(int r, int c, Jewel clr)
 	}
 	if(combo>2)
 	{
-		markTiles(r, c, clr, Direction::E, combo);
+		markTiles(r, c, clr, E, combo);
 		ostringstream ss;
-		ss << "Color: " << clr << " ["<<r<<"]["<<c<<"] Dir: " <<Direction::E;
+		ss << "Color: " << clr << " ["<<r<<"]["<<c<<"] Dir: " << E;
 		combos.push_back(ss.str());
 	}
 }
@@ -185,11 +185,11 @@ void GameBoard::markTiles(int r, int c, Jewel clr, Direction dir, int count)
 {
 	switch(int(dir))
 	{
-	case Direction::E:
+	case E:
 		for(int i = c; i < c+count; i++)
 			board[r][i]->marked = true;
 		break;
-	case Direction::S:
+	case S:
 		for(int i = r; i < r+count; i++)
 			board[i][c]->marked = true;
 		break;
@@ -207,28 +207,28 @@ bool GameBoard::possibleMatches()
 			Jewel clr = board[r][c]->clr;
 
 			if(r>=1 && board[r-1][c]->clr == clr)
-				if(possibleMatchPair(r-1, c, clr, Direction::N)) return true;
+				if(possibleMatchPair(r-1, c, clr, N)) return true;
 
 			if(r>=2 && board[r-2][c]->clr == clr)
-				if(possibleMatchGap(r-1, c, clr, Direction::N)) return true;
+				if(possibleMatchGap(r-1, c, clr, N)) return true;
 			
 			if(c<GAME_COLS-1 && board[r][c+1]->clr == clr)
-				if(possibleMatchPair(r, c+1, clr, Direction::E)) return true;
+				if(possibleMatchPair(r, c+1, clr, E)) return true;
 
 			if(c<GAME_COLS-2 && board[r][c+2]->clr == clr)
-				if(possibleMatchGap(r, c+1, clr, Direction::E)) return true;
+				if(possibleMatchGap(r, c+1, clr, E)) return true;
 
 			if(r<GAME_ROWS-1 && board[r+1][c]->clr == clr)
-				if(possibleMatchPair(r+1, c, clr, Direction::S)) return true;
+				if(possibleMatchPair(r+1, c, clr, S)) return true;
 
 			if(r<GAME_ROWS-2 && board[r+2][c]->clr == clr)
-				if(possibleMatchGap(r+1, c, clr, Direction::S)) return true;
+				if(possibleMatchGap(r+1, c, clr, S)) return true;
 
 			if(c>=1 && board[r][c-1]->clr == clr)
-				if(possibleMatchPair(r, c-1, clr, Direction::W)) return true;
+				if(possibleMatchPair(r, c-1, clr, W)) return true;
 
 			if(c>=2 && board[r][c-2]->clr == clr)
-				if(possibleMatchGap(r, c-1, clr, Direction::W)) return true;
+				if(possibleMatchGap(r, c-1, clr, W)) return true;
 		}
 
 	return false;
@@ -237,14 +237,14 @@ bool GameBoard::possibleMatches()
 bool GameBoard::possibleMatchGap(int r, int c, Jewel clr, Direction dir)
 {
 	//if we are looking at a gap the current [r][c] element should be "on" the gap itself
-	if(dir == Direction::N || dir == Direction::S)
+	if(dir == N || dir == S)
 	{
 		if(c>=1 && board[r][c-1]->clr == clr)
 			return true;
 		else if(c<GAME_COLS-1 && board[r][c+1]->clr == clr)
 			return true;
 	}
-	else if(dir == Direction::E || dir == Direction::W)
+	else if(dir == E || dir == W)
 	{
 		if(r>=1 && board[r-1][c]->clr == clr)
 			return true;
@@ -257,7 +257,7 @@ bool GameBoard::possibleMatchGap(int r, int c, Jewel clr, Direction dir)
 
 bool GameBoard::possibleMatchPair(int r, int c, Jewel clr, Direction dir)
 {
-	if(dir == Direction::N)
+	if(dir == N)
 	{
 		if(r>=2 && board[r-2][c]->clr == clr)
 			return true;
@@ -266,7 +266,7 @@ bool GameBoard::possibleMatchPair(int r, int c, Jewel clr, Direction dir)
 		else if(r>=1 && c>=1 && board[r-1][c-1]->clr == clr)
 			return true;
 	}
-	else if(dir == Direction::S)		
+	else if(dir == S)		
 	{
 		if(r<GAME_ROWS-2 && board[r+2][c]->clr == clr)
 			return true;
@@ -275,7 +275,7 @@ bool GameBoard::possibleMatchPair(int r, int c, Jewel clr, Direction dir)
 		else if(r<GAME_ROWS-1 && c>=1 && board[r+1][c-1]->clr == clr)
 			return true;
 	}
-	else if(dir == Direction::E)
+	else if(dir == E)
 	{
 		if(c<GAME_COLS-2 && board[r][c+2]->clr == clr)
 			return true;
@@ -284,7 +284,7 @@ bool GameBoard::possibleMatchPair(int r, int c, Jewel clr, Direction dir)
 		else if(c<GAME_COLS-1 && r>=1 && board[r-1][c+1]->clr == clr)
 			return true;
 	}
-	else if(dir == Direction::W)
+	else if(dir == W)
 	{
 		if(c>=2 && board[r][c-2]->clr == clr)
 			return true;
@@ -301,20 +301,20 @@ int GameBoard::legalMove(int r, int c, Direction dir)
 {
 	//perform range checking - very important in this situation
 	if(r<0||r>=GAME_ROWS||c<0||c>=GAME_COLS) return 0;
-	if(r==0 && dir==Direction::N) return 0;
-	else if(r==GAME_ROWS-1 && dir==Direction::S) return 0;
-	else if(c==0 && dir==Direction::W) return 0;
-	else if(c==GAME_COLS-1 && dir==Direction::E) return 0;
+	if(r==0 && dir==N) return 0;
+	else if(r==GAME_ROWS-1 && dir==S) return 0;
+	else if(c==0 && dir==W) return 0;
+	else if(c==GAME_COLS-1 && dir==E) return 0;
 
 	int swapR = r;
 	int swapC = c;
 
 	switch(int(dir))
 	{
-	case Direction::N: swapR--; break;
-	case Direction::E: swapC++; break;
-	case Direction::S: swapR++; break;
-	case Direction::W: swapC--; break;
+	case N: swapR--; break;
+	case E: swapC++; break;
+	case S: swapR++; break;
+	case W: swapC--; break;
 	}
 
 	cout << "Swapping: " << r << ", " << c << " color: " << board[r][c]->clr << " With " << swapR << ", " << swapC << " color: " << board[swapR][swapC]->clr << endl;

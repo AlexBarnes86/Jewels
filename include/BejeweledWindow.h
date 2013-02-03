@@ -1,5 +1,6 @@
 #ifndef BejeweledWindow_h
 #define BejeweledWindow_h
+
 #include "std_lib_facilities.h"
 #include "GameBoard.h"
 #include "BejeweledIO.h"

@@ -1,6 +1,6 @@
-#pragma warning (disable: 4482)
-#pragma warning (disable: 4311)
-#pragma warning (disable: 4312)
+#ifndef GAMEBOARD_H
+#define GAMEBOARD_H
+
 #include "std_lib_facilities.h"
 #include "fltk.h"
 
@@ -8,8 +8,7 @@ extern vector<Fl_GIF_Image*> imageVector;
 
 enum Direction{N, E, S, W, UNDEFINED = -1};
 
-struct Jewel
-{
+struct Jewel {
 	Jewel(int cc);
 	int as_int() const;
 	Fl_Color as_Fl_Color() const {return c;}
@@ -18,23 +17,19 @@ private:
 	Fl_Color c;
 };
 
-inline bool operator==(const Jewel& lhs, const Jewel& rhs)
-{
+inline bool operator==(const Jewel& lhs, const Jewel& rhs) {
 	return lhs.as_int() == rhs.as_int();
 }
 
-inline bool operator!=(const Jewel& lhs, const Jewel& rhs)
-{
+inline bool operator!=(const Jewel& lhs, const Jewel& rhs) {
 	return lhs.as_int() != rhs.as_int();
 }
 
-inline ostream& operator<<(ostream& os, const Jewel& c)
-{
+inline ostream& operator<<(ostream& os, const Jewel& c) {
 	return os<<c.as_int();
 }
 
-struct CurrentSelection
-{
+struct CurrentSelection {
 	static int row;
 	static int col;
 
@@ -42,8 +37,7 @@ private:
 	CurrentSelection();//dont want to create any instances
 };
 
-class Tile: public Fl_Button
-{
+class Tile: public Fl_Button {
 public:
 	Tile()
 		:Fl_Button(0, 0, 0, 0, 0), clr(0), marked(false){}
@@ -67,8 +61,7 @@ protected:
 
 void cb_TileButton(Tile* tile, void* v);
 
-class GameBoard
-{
+class GameBoard {
 public:
 	static const int GAME_ROWS = 8;
 	static const int GAME_COLS = 8;
@@ -96,7 +89,7 @@ private:
 	void markTiles(int r, int c, Jewel color, Direction dir, int count);
 	void removeMatches();
 	
-	(Tile*) board[GAME_ROWS][GAME_COLS];
+	Tile* board[GAME_ROWS][GAME_COLS];
 	int numColors;
 	vector<String> combos;
 	Direction comboDir;
@@ -105,6 +98,8 @@ private:
 
 typedef void (idleCallback)(void*);
 inline void idleFunction(void*){}
+
+#endif
 
 /*****************************************************************
 
