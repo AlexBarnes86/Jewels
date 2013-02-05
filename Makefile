@@ -5,11 +5,11 @@ CFLAGS=-I/usr/include -Iinclude -g -c
 OBJECTS=bin/BejeweledMain.o bin/BejeweledIO.o bin/BejeweledWindow.o bin/GameBoard.o
 SOURCES=src/BejeweledMain.cpp src/Bejeweled.cpp.cpp src/BejeweledMain.cpp src/BejeweledWin.cppw.cpp src/Game.cppard.cpp
 LIBS=-lfltk -lfltk_images
-APPNAME=bejeweled
+APPNAME=Jewels
 
 # --- targets
-all: bejeweled
-bejeweled: $(OBJECTS)
+all: jewels
+jewels: $(OBJECTS)
 	$(CC) -o $(APPNAME) $(OBJECTS) $(LIBS)
            
 bin/BejeweledMain.o:
