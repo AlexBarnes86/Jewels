@@ -1,9 +1,0 @@
-== Jewels ==
-Barebones re-implementation of the popular PopCap (TM) game: "Bejewled"
-
-This is a project from my freshman year of college that I've migrated away from Microsoft's visual studio (I think it was MSVC 2007) towork in Linux with g++ and a simple Makefile.
-
-Amazingly, other than a few minor changes to satisfy a couple minor snags switching between compilers, the program just works!
-I've become much more of a Java developer these days (boo and hiss all you want :-P) so the Makefile isn't quite the greatest quality, but it's at least a small project of limited scope!
-
-Requires development version of the FLTK Windowing Library version 1.3 (libfltk1.3-dev)
